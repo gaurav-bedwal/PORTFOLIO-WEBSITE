@@ -51,7 +51,7 @@ const About = () => {
                             className="mt-10"
                         >
                             <a
-                                href="/Gaurav_Bedwal_CV.pdf"
+                                href="/CV17FEB.pdf"
                                 download="Gaurav_Bedwal_CV.pdf"
                                 className="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-bold rounded-xl text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-500 transition-all overflow-hidden w-full sm:w-auto"
                             >

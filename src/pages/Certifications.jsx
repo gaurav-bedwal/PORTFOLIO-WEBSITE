@@ -85,7 +85,7 @@ const Certifications = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="glass-card rounded-[2rem] p-8 border border-white/5 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300 block"
+                        className="glass-card rounded-[2rem] p-6 md:p-8 border border-white/5 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300 block"
                     >
                         <div className={`absolute -inset-20 bg-gradient-to-br ${cert.color === 'brand' ? 'from-brand-500/10' : 'from-accent-500/10'} to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`}></div>
 
@@ -118,7 +118,7 @@ const Certifications = () => {
                             </div>
                         )}
 
-                        <h3 className={`text-2xl font-bold text-white mb-2 font-display group-hover:text-${cert.color}-400 transition-colors duration-300 relative z-10 pr-8`}>
+                        <h3 className={`text-2xl font-bold text-white mb-2 font-display transition-colors duration-300 relative z-10 pr-8 ${cert.color === 'brand' ? 'group-hover:text-brand-400' : 'group-hover:text-accent-400'}`}>
                             {cert.title}
                         </h3>
                         <p className="text-gray-400 font-medium tracking-wide relative z-10 mb-8">
@@ -126,7 +126,11 @@ const Certifications = () => {
                         </p>
 
                         <div className={`mt-auto relative z-10 pt-6 border-t border-white/5 flex items-center justify-between`}>
-                            <div className={`flex items-center text-sm font-bold text-${cert.color}-400 bg-${cert.color}-500/10 px-4 py-2 rounded-xl group-hover:bg-${cert.color}-500 group-hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(${cert.color === 'brand' ? '0,240,255' : '192,38,211'},0.3)] group-hover:shadow-[0_0_25px_rgba(${cert.color === 'brand' ? '0,240,255' : '192,38,211'},0.6)]`}>
+                            <div className={`flex items-center text-sm font-bold px-4 py-2 rounded-xl transition-all duration-300 
+                                ${cert.color === 'brand' 
+                                    ? 'text-brand-400 bg-brand-500/10 group-hover:bg-brand-500 group-hover:text-black shadow-[0_0_15px_rgba(0,240,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]' 
+                                    : 'text-accent-400 bg-accent-500/10 group-hover:bg-accent-500 group-hover:text-black shadow-[0_0_15px_rgba(192,38,211,0.3)] group-hover:shadow-[0_0_25px_rgba(192,38,211,0.6)]'
+                                }`}>
                                 <ExternalLink size={16} className="mr-2" />
                                 Click to view Certificate
                             </div>

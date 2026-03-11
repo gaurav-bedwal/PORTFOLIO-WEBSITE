@@ -81,7 +81,7 @@ const Home = () => {
                         Contact Me
                     </Link>
                     <a
-                        href="/Gaurav_Bedwal_CV.pdf"
+                        href="/CV17FEB.pdf"
                         download="Gaurav_Bedwal_CV.pdf"
                         className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent-500 transition-all overflow-hidden"
                     >
