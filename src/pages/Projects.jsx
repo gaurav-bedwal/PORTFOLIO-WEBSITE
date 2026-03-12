@@ -55,7 +55,7 @@ const Projects = () => {
     ];
 
     return (
-        <div className="w-full py-6">
+        <div id="projects" className="w-full py-6">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

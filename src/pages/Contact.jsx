@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -8,11 +8,45 @@ const Contact = () => {
         email: '',
         message: ''
     });
+    const [status, setStatus] = useState('idle'); // idle, loading, success, error
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("Thanks for your message! This is a demo form.");
-        setFormData({ name: '', email: '', message: '' });
+        setStatus('loading');
+
+        try {
+            // Replace with your actual Web3Forms Access Key
+            // Get one at https://web3forms.com/
+            const accessKey = "YOUR_ACCESS_KEY_HERE"; 
+            
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: accessKey,
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                setStatus('success');
+                setFormData({ name: '', email: '', message: '' });
+                setTimeout(() => setStatus('idle'), 5000);
+            } else {
+                setStatus('error');
+                setErrorMessage(result.message || "Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            setStatus('error');
+            setErrorMessage("Failed to send message. Please check your connection.");
+        }
     };
 
     const handleChange = (e) => {
@@ -23,7 +57,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="w-full py-6">
+        <div id="contact" className="w-full py-6">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -108,54 +142,88 @@ const Contact = () => {
 
                         <h3 className="text-3xl font-display font-bold text-white mb-10 relative z-10">Send A Message</h3>
 
-                        <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-bold tracking-wider text-gray-400 uppercase mb-3 ml-1">Full Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full px-6 py-4 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-white transition-all hover:bg-white/5 outline-none backdrop-blur-sm shadow-inner"
-                                    placeholder="John Doe"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-bold tracking-wider text-gray-400 uppercase mb-3 ml-1">Email Address</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full px-6 py-4 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-white transition-all hover:bg-white/5 outline-none backdrop-blur-sm shadow-inner"
-                                    placeholder="john@example.com"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-bold tracking-wider text-gray-400 uppercase mb-3 ml-1">Your Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    required
-                                    rows="5"
-                                    className="w-full px-6 py-4 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-white transition-all hover:bg-white/5 outline-none backdrop-blur-sm shadow-inner resize-none"
-                                    placeholder="Hello Gaurav, I'd like to discuss..."
-                                ></textarea>
-                            </div>
-                            <button
-                                type="submit"
-                                className="w-full inline-flex items-center justify-center px-8 py-5 text-lg font-bold rounded-xl text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] mt-6 group/btn"
+                        {status === 'success' ? (
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="h-full flex flex-col items-center justify-center text-center space-y-4 py-12 relative z-10"
                             >
-                                Send Message
-                                <Send className="ml-3 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" size={20} />
-                            </button>
-                        </form>
+                                <div className="p-4 rounded-full bg-green-500/10 text-green-500 mb-2">
+                                    <CheckCircle2 size={64} />
+                                </div>
+                                <h4 className="text-2xl font-bold text-white">Message Sent!</h4>
+                                <p className="text-gray-400">Thanks for reaching out. I'll get back to you soon.</p>
+                                <button 
+                                    onClick={() => setStatus('idle')}
+                                    className="mt-6 px-6 py-2 rounded-xl border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium"
+                                >
+                                    Send another message
+                                </button>
+                            </motion.div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+                                {status === 'error' && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center"
+                                    >
+                                        <AlertCircle size={18} className="mr-3 flex-shrink-0" />
+                                        {errorMessage}
+                                    </motion.div>
+                                )}
+                                <div>
+                                    <label htmlFor="name" className="block text-sm font-bold tracking-wider text-gray-400 uppercase mb-3 ml-1">Full Name</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        required
+                                        disabled={status === 'loading'}
+                                        className="w-full px-6 py-4 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-white transition-all hover:bg-white/5 outline-none backdrop-blur-sm shadow-inner disabled:opacity-50"
+                                        placeholder="John Doe"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="email" className="block text-sm font-bold tracking-wider text-gray-400 uppercase mb-3 ml-1">Email Address</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                        disabled={status === 'loading'}
+                                        className="w-full px-6 py-4 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-white transition-all hover:bg-white/5 outline-none backdrop-blur-sm shadow-inner disabled:opacity-50"
+                                        placeholder="john@example.com"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="message" className="block text-sm font-bold tracking-wider text-gray-400 uppercase mb-3 ml-1">Your Message</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        required
+                                        disabled={status === 'loading'}
+                                        rows="5"
+                                        className="w-full px-6 py-4 rounded-xl bg-black/40 border border-white/10 focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 text-white transition-all hover:bg-white/5 outline-none backdrop-blur-sm shadow-inner resize-none disabled:opacity-50"
+                                        placeholder="Hello Gaurav, I'd like to discuss..."
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    disabled={status === 'loading'}
+                                    className="w-full inline-flex items-center justify-center px-8 py-5 text-lg font-bold rounded-xl text-white bg-white/5 hover:bg-white/10 border border-white/10 hover:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] mt-6 group/btn disabled:opacity-50"
+                                >
+                                    {status === 'loading' ? 'Sending...' : 'Send Message'}
+                                    <Send className={`ml-3 ${status === 'loading' ? 'animate-pulse' : 'group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1'} transition-transform`} size={20} />
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </motion.div>
             </div>

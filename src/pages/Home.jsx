@@ -1,11 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Server, TerminalSquare, Download } from 'lucide-react';
 
 const Home = () => {
+    const scrollToSection = (e, id) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80; // Offset for fixed navbar
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
-        <div className="w-full flex-grow flex flex-col justify-center min-h-[70vh] relative">
+        <div id="home" className="w-full flex-grow flex flex-col justify-center min-h-[70vh] relative">
             <div className="max-w-4xl relative z-10 mx-auto text-center md:text-left">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -66,20 +80,22 @@ const Home = () => {
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="flex flex-wrap justify-center md:justify-start gap-6"
                 >
-                    <Link
-                        to="/projects"
+                    <a
+                        href="#projects"
+                        onClick={(e) => scrollToSection(e, 'projects')}
                         className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-brand-600 hover:bg-brand-500 transition-all shadow-[0_0_30px_rgba(0,240,255,0.3)] hover:shadow-[0_0_50px_rgba(0,240,255,0.5)] overflow-hidden"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
                         <span className="relative z-10">View Projects</span>
                         <ArrowRight className="ml-3 group-hover:translate-x-1 transition-transform relative z-10" size={20} />
-                    </Link>
-                    <Link
-                        to="/contact"
+                    </a>
+                    <a
+                        href="#contact"
+                        onClick={(e) => scrollToSection(e, 'contact')}
                         className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-2xl text-white glass hover:bg-white/10 border border-white/20 hover:border-brand-500 transition-all"
                     >
                         Contact Me
-                    </Link>
+                    </a>
                     <a
                         href="/CV17FEB.pdf"
                         download="Gaurav_Bedwal_CV.pdf"

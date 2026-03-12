@@ -10,24 +10,29 @@ import Experience from './pages/Experience';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 
+const MainContent = () => (
+  <>
+    <Home />
+    <About />
+    <Skills />
+    <Projects />
+    <Experience />
+    <Certifications />
+    <Contact />
+  </>
+);
+
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="skills" element={<Skills />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="experience" element={<Experience />} />
-            <Route path="certifications" element={<Certifications />} />
-            <Route path="contact" element={<Contact />} />
+            <Route index element={<MainContent />} />
           </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
 }
-
 export default App;

@@ -4,7 +4,7 @@ import { BookOpen, Briefcase, Calendar, ChevronRight, ExternalLink } from 'lucid
 
 const Experience = () => {
     return (
-        <div className="w-full py-6">
+        <div id="experience" className="w-full py-6">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ const Experience = () => {
                                     <h2 className="text-3xl font-bold text-white font-display mb-2 group-hover:text-brand-400 transition-colors">
                                         Software Engineering Virtual Job Simulation
                                     </h2>
-                                    <a href="https://drive.google.com/file/d/1kRrEiLW5BBlIjwHfg7c9QOj5zsJAcvGS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xl font-medium text-gray-300 hover:text-white transition-colors cursor-pointer group/link">
+                                    <a href="https://drive.google.com/file/d/1KE-bM2TolwOjECzyxrS1JXiiBjVQs2DM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-xl font-medium text-gray-300 hover:text-white transition-colors cursor-pointer group/link">
                                         JPMorgan Chase & Co. <ExternalLink size={16} className="ml-2 group-hover/link:translate-x-1 transition-transform" />
                                     </a>
                                 </div>

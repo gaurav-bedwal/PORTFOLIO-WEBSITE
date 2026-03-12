@@ -1,28 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        // Intersection Observer for active section highlighting
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Adjust margin to trigger when section is in the upper part of viewport
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const sections = ['home', 'about', 'skills', 'projects', 'experience', 'certifications', 'contact'];
+        sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            sections.forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) observer.unobserve(el);
+            });
+        };
     }, []);
 
+    const scrollToSection = (e, id) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80; // Offset for fixed navbar
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: id === 'home' ? 0 : offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+        setIsOpen(false);
+    };
+
     const links = [
-        { name: 'Home', path: '/' },
-        { name: 'About', path: '/about' },
-        { name: 'Skills', path: '/skills' },
-        { name: 'Projects', path: '/projects' },
-        { name: 'Experience', path: '/experience' },
-        { name: 'Certifications', path: '/certifications' },
-        { name: 'Contact', path: '/contact' },
+        { name: 'Home', id: 'home' },
+        { name: 'About', id: 'about' },
+        { name: 'Skills', id: 'skills' },
+        { name: 'Projects', id: 'projects' },
+        { name: 'Experience', id: 'experience' },
+        { name: 'Certifications', id: 'certifications' },
+        { name: 'Contact', id: 'contact' },
     ];
 
     return (
@@ -32,7 +77,8 @@ const Navbar = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="flex-shrink-0 font-display font-black text-2xl tracking-tighter"
+                        className="flex-shrink-0 font-display font-black text-2xl tracking-tighter cursor-pointer"
+                        onClick={(e) => scrollToSection(e, 'home')}
                     >
                         <span className="text-white">G</span>
                         <span className="text-brand-500">B</span>
@@ -41,28 +87,23 @@ const Navbar = () => {
 
                     <div className="hidden md:flex items-center space-x-1">
                         {links.map((link) => (
-                            <NavLink
+                            <a
                                 key={link.name}
-                                to={link.path}
-                                className={({ isActive }) =>
-                                    `px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 relative group overflow-hidden ${isActive ? 'text-white' : 'text-gray-400 hover:text-white'
-                                    }`
-                                }
+                                href={`#${link.id}`}
+                                onClick={(e) => scrollToSection(e, link.id)}
+                                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 relative group overflow-hidden ${activeSection === link.id ? 'text-white' : 'text-gray-400 hover:text-white'
+                                    }`}
                             >
-                                {({ isActive }) => (
-                                    <>
-                                        <span className="relative z-10">{link.name}</span>
-                                        {isActive && (
-                                            <motion.div
-                                                layoutId="nav_indicator"
-                                                className="absolute inset-0 bg-white/10 rounded-full z-0 border border-white/10"
-                                                initial={false}
-                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                            />
-                                        )}
-                                    </>
+                                <span className="relative z-10">{link.name}</span>
+                                {activeSection === link.id && (
+                                    <motion.div
+                                        layoutId="nav_indicator"
+                                        className="absolute inset-0 bg-white/10 rounded-full z-0 border border-white/10"
+                                        initial={false}
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    />
                                 )}
-                            </NavLink>
+                            </a>
                         ))}
                     </div>
 
@@ -95,18 +136,16 @@ const Navbar = () => {
                                     transition={{ delay: idx * 0.05 }}
                                     key={link.name}
                                 >
-                                    <NavLink
-                                        to={link.path}
-                                        onClick={() => setIsOpen(false)}
-                                        className={({ isActive }) =>
-                                            `block px-4 py-3 rounded-2xl text-lg font-medium transition-all ${isActive
-                                                ? 'bg-gradient-to-r from-brand-500/20 to-accent-500/20 text-white border border-brand-500/30'
-                                                : 'text-gray-400 hover:text-white hover:bg-white/5'
-                                            }`
-                                        }
+                                    <a
+                                        href={`#${link.id}`}
+                                        onClick={(e) => scrollToSection(e, link.id)}
+                                        className={`block px-4 py-3 rounded-2xl text-lg font-medium transition-all ${activeSection === link.id
+                                            ? 'bg-gradient-to-r from-brand-500/20 to-accent-500/20 text-white border border-brand-500/30'
+                                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                            }`}
                                     >
                                         {link.name}
-                                    </NavLink>
+                                    </a>
                                 </motion.div>
                             ))}
                         </div>

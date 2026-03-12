@@ -33,7 +33,7 @@ const Skills = () => {
     ];
 
     return (
-        <div className="w-full py-6">
+        <div id="skills" className="w-full py-6">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
