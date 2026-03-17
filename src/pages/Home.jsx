@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Server, TerminalSquare, Download } from 'lucide-react';
 
+import { TypeAnimation } from 'react-type-animation';
+
 const Home = () => {
     const scrollToSection = (e, id) => {
         e.preventDefault();
@@ -54,14 +56,40 @@ const Home = () => {
                         <div className="p-2.5 rounded-xl bg-brand-500/10 text-brand-400 mr-3 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)]">
                             <Server size={24} />
                         </div>
-                        Backend Developer
+                        <TypeAnimation
+                            sequence={[
+                                'Backend Developer',
+                                1500,
+                                'Software Engineer',
+                                1500,
+                                'API Designer',
+                                1500
+                            ]}
+                            wrapper="span"
+                            speed={50}
+                            className="inline-block"
+                            repeat={Infinity}
+                        />
                     </div>
                     <span className="hidden md:inline text-white/20">|</span>
                     <div className="flex items-center justify-center md:justify-start group">
                         <div className="p-2.5 rounded-xl bg-accent-500/10 text-accent-400 mr-3 group-hover:bg-accent-500 group-hover:text-white transition-all shadow-[0_0_15px_rgba(192,38,211,0.2)]">
                             <TerminalSquare size={24} />
                         </div>
-                        Computer Science Student
+                        <TypeAnimation
+                            sequence={[
+                                'Computer Science Student',
+                                1500,
+                                'MERN Stack Developer',
+                                1500,
+                                'Tech Enthusiast',
+                                1500
+                            ]}
+                            wrapper="span"
+                            speed={50}
+                            className="inline-block"
+                            repeat={Infinity}
+                        />
                     </div>
                 </motion.div>
 
