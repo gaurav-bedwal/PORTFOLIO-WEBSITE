@@ -59,14 +59,14 @@ const Home = () => {
                         <TypeAnimation
                             sequence={[
                                 'Backend Developer',
-                                1500,
+                                2000,
                                 'Software Engineer',
-                                1500,
+                                2000,
                                 'API Designer',
-                                1500
+                                2000
                             ]}
                             wrapper="span"
-                            speed={50}
+                            speed={20}
                             className="inline-block"
                             repeat={Infinity}
                         />
@@ -79,14 +79,14 @@ const Home = () => {
                         <TypeAnimation
                             sequence={[
                                 'Computer Science Student',
-                                1500,
+                                2000,
                                 'MERN Stack Developer',
-                                1500,
+                                2000,
                                 'Tech Enthusiast',
-                                1500
+                                2000
                             ]}
                             wrapper="span"
-                            speed={50}
+                            speed={20}
                             className="inline-block"
                             repeat={Infinity}
                         />
