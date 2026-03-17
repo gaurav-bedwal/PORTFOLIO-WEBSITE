@@ -50,8 +50,8 @@ const Certifications = () => {
             imageSrc: ""
         },
         {
-            title: "Additional Certification",
-            provider: "Training & Development",
+            title: "Build Generative AI Apps and Solutions with No-code Tools",
+            provider: "IBM",
             date: "2024",
             icon: Award,
             color: "accent",
