@@ -26,7 +26,8 @@ const Projects = () => {
                 "Optimized search logic reducing selection time by 40%"
             ],
             techStack: ["HTML", "CSS", "JavaScript", "MongoDB", "React", "Nodejs", "Tailwind CSS"],
-            githubLink: "https://github.com/gaurav-bedwal/CAR-RENTAL-"
+            githubLink: "https://github.com/gaurav-bedwal/CAR-RENTAL-",
+            liveLink: "https://car-rental-jade-omega.vercel.app"
         },
         {
             title: "AI-Driven Code Reviewer",

@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 
-const ProjectCard = ({ title, description, features, techStack, githubLink, delay = 0 }) => {
+const ProjectCard = ({ title, description, features, techStack, githubLink, liveLink, delay = 0 }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -43,17 +43,31 @@ const ProjectCard = ({ title, description, features, techStack, githubLink, dela
                             </span>
                         ))}
                     </div>
-                    <div className="flex">
-                        <a
-                            href={githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group/btn relative inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all overflow-hidden border border-white/10 hover:border-brand-500/50 w-full"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-brand-500/20 to-accent-500/20 translate-y-[100%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
-                            <Github size={18} className="mr-2 relative z-10" />
-                            <span className="font-semibold relative z-10">View Source</span>
-                        </a>
+                    <div className="flex gap-4">
+                        {githubLink && (
+                            <a
+                                href={githubLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group/btn relative flex-1 inline-flex items-center justify-center px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all overflow-hidden border border-white/10 hover:border-brand-500/50"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-brand-500/20 to-accent-500/20 translate-y-[100%] group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                                <Github size={18} className="mr-2 relative z-10" />
+                                <span className="font-semibold relative z-10 text-sm sm:text-base">Source</span>
+                            </a>
+                        )}
+                        {liveLink && (
+                            <a
+                                href={liveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group/btn relative flex-1 inline-flex items-center justify-center px-4 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white transition-all overflow-hidden border border-brand-500/50 hover:border-brand-400 shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[200%] group-hover/btn:translate-x-[200%] transition-transform duration-700 pointer-events-none"></div>
+                                <ExternalLink size={18} className="mr-2 relative z-10" />
+                                <span className="font-semibold relative z-10 text-sm sm:text-base">Live Demo</span>
+                            </a>
+                        )}
                     </div>
                 </div>
             </div>
