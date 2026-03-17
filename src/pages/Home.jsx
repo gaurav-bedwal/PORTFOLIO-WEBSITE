@@ -21,7 +21,7 @@ const Home = () => {
     };
 
     return (
-        <div id="home" className="w-full flex-grow flex flex-col justify-center min-h-[80vh] relative">
+        <div id="home" className="w-full flex-grow flex flex-col justify-center min-h-[80vh] relative pt-12 md:pt-16">
             <div className="max-w-4xl relative z-10 mx-auto text-center md:text-left">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
