@@ -1,34 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Server, Database as DatabaseIcon, LayoutTemplate, BrainCircuit } from 'lucide-react';
+import { Code2, Server, Database as DatabaseIcon, LayoutTemplate, Wrench } from 'lucide-react';
 import SkillCard from '../components/ui/SkillCard';
 
 const Skills = () => {
     const categories = [
         {
-            title: "Languages",
+            title: "Programming Languages",
             icon: Code2,
-            skills: ["Java", "Python", "C++", "JavaScript", "C", "PHP"]
+            skills: ["Java", "Python", "C++", "C", "JavaScript", "PHP"]
         },
         {
-            title: "Backend Frameworks",
-            icon: Server,
-            skills: ["NodeJS", "ReactJS"]
-        },
-        {
-            title: "Frontend Basics",
+            title: "Frontend Development",
             icon: LayoutTemplate,
-            skills: ["HTML", "CSS", "Tailwind CSS", "React"]
+            skills: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "React.js"]
         },
         {
-            title: "Databases",
+            title: "Backend Development",
+            icon: Server,
+            skills: ["Node.js", "Express.js", "PHP", "Laravel"]
+        },
+        {
+            title: "Database",
             icon: DatabaseIcon,
-            skills: ["MySQL", "MongoDB", "Joins & Subqueries", "Aggregations"]
+            skills: ["MongoDB", "MySQL"]
         },
         {
-            title: "Soft Skills",
-            icon: BrainCircuit,
-            skills: ["Problem Solving", "Team Player", "Leadership", "Adaptability"]
+            title: "Tools & Platforms",
+            icon: Wrench,
+            skills: ["Git", "GitHub", "VS Code", "Postman"]
         }
     ];
 
