@@ -5,16 +5,17 @@ import ProjectCard from '../components/ui/ProjectCard';
 const Projects = () => {
     const projects = [
         {
-            title: "Event Dashboard",
-            description: "An Event & Task Management System offering comprehensive task tracking and backend logic, enhancing efficiency by 35%.",
+            title: "Instagram Clone",
+            description: "A fully responsive Full Stack Social Media Application inspired by Instagram, focused on performance, scalability, and real-time user interaction.",
             features: [
-                "15+ backend features including task prioritization & deadlines",
-                "State-transition logic handling 100+ test task entries",
-                "Input validation & session authentication reducing vulnerabilities by 40%",
-                "Secured database queries using prepared statements"
+                "Secure authentication system supporting 100% encrypted user login & registration",
+                "Post creation with image upload, captions, likes, and comments",
+                "Achieved < 2s average page load time using optimized API calls and efficient state management",
+                "Real-time features for dynamic user engagement with a scalable backend architecture"
             ],
-            techStack: ["HTML", "Tailwind CSS", "JavaScript", "Nodejs", "Reactjs", "MongoDB"],
-            githubLink: "https://github.com/gaurav-bedwal/Event-Planing-Website"
+            techStack: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT"],
+            githubLink: "https://github.com/gaurav-bedwal/Mini-Instagram",
+            liveLink: "https://mini-instagramgauravbedwal.vercel.app"
         },
         {
             title: "Car Rental Website",
@@ -52,19 +53,6 @@ const Projects = () => {
             ],
             techStack: ["React", "Nodejs", "MongoDB", "Tailwind CSS"],
             githubLink: "https://github.com/gaurav-bedwal/Fair-Crop-Trade-web-Application/"
-        },
-        {
-            title: "Instagram Clone",
-            description: "A fully responsive Full Stack Social Media Application inspired by Instagram, focused on performance, scalability, and real-time user interaction.",
-            features: [
-                "Secure authentication system supporting 100% encrypted user login & registration",
-                "Post creation with image upload, captions, likes, and comments",
-                "Achieved < 2s average page load time using optimized API calls and efficient state management",
-                "Real-time features for dynamic user engagement with a scalable backend architecture"
-            ],
-            techStack: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT"],
-            githubLink: "https://github.com/gaurav-bedwal/Mini-Instagram",
-            liveLink: "https://mini-instagramgauravbedwal.vercel.app"
         }
     ];
 
